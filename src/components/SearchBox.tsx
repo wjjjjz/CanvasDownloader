@@ -10,17 +10,12 @@ export default function SearchBox() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!query.trim()) return;
+    const value = query.trim();
+    if (!value) return;
 
     setIsLoading(true);
-    
-    // Check if it's a Spotify link
-    if (query.includes("spotify.com") || query.includes("spotify:")) {
-      router.push(`/canvas?link=${encodeURIComponent(query.trim())}`);
-    } else {
-      // It's a search query
-      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
-    }
+    // 当前版本仅支持粘贴 Spotify 歌曲链接，统一跳转到 Canvas 页面
+    router.push(`/canvas?link=${encodeURIComponent(value)}`);
   };
 
   const openSpotify = () => {
